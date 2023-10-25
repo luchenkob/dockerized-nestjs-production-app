@@ -1,0 +1,2 @@
+REPO dockerized-nestjs-production-app
+LOAD dockerized-nestjs-production-app.yaml
