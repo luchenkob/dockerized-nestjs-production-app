@@ -1,0 +1,90 @@
+namespace: dockerized-nestjs-production-app
+
+database-service:
+  defines: runnable
+  inherits: mariadb/mariadb
+  metadata:
+    name: database-service
+    description: Required database service for the backend.
+    icon: https://www.vectorlogo.zone/logos/mariadb/mariadb-ar21.png
+  variables:
+    mariadb-database-name:
+      type: string
+      value: mariadb
+      description: ''
+    mariadb-image:
+      type: string
+      value: mariadb:latest
+      description: ''
+    mariadb-image-tag:
+      type: string
+      value: latest
+      description: ''
+    mariadb-root-password:
+      type: string
+      value: 4wfoA7auxY
+      description: ''
+    mariadb-user-name:
+      type: string
+      value: mariadbuser
+      description: ''
+    mariadb-user-password:
+      type: string
+      value: Cz9mGzmRtW
+      description: ''
+    mysql-database:
+      type: string
+      value: mariadb
+      description: ''
+    mysql-password:
+      type: string
+      value: Cz9mGzmRtW
+      description: ''
+    mysql-root-password:
+      type: string
+      value: 4wfoA7auxY
+      description: ''
+    mysql-user:
+      type: string
+      value: mariadbuser
+      description: ''
+
+redis-cache:
+  defines: runnable
+  inherits: redis/redis
+  metadata:
+    name: redis-cache
+    description: Redis service used for caching by the backend.
+    icon: >-
+      https://cdn.icon-icons.com/icons2/2415/PNG/512/redis_original_wordmark_logo_icon_146369.png
+  variables:
+    redis_disable_commands:
+      type: string
+      value: FLUSHDB,FLUSHALL,CONFIG
+      description: ''
+    redis_empty_password:
+      type: string
+      value: 'yes'
+      description: ''
+    redis_instance_name:
+      type: string
+      value: master
+      description: ''
+    redis_io_thread:
+      type: string
+      value: '1'
+      description: ''
+    redis_io_threads_do_reads:
+      type: string
+      value: 'yes'
+      description: ''
+    redis_port:
+      type: int
+      value: 6379
+      description: ''
+
+stack:
+  defines: group
+  members:
+    - dockerized-nestjs-production-app/database-service
+    - dockerized-nestjs-production-app/redis-cache
