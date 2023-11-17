@@ -1,0 +1,5 @@
+namespace: dockerized-nestjs-production-app
+
+stack:
+  defines: group
+  members: []
