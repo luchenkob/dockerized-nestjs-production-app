@@ -1,0 +1,28 @@
+namespace: dockerized-nestjs-production-app
+
+nestjs-backend:
+  defines: runnable
+  metadata:
+    name: nestjs-backend
+    description: A NestJS backend service.
+    icon: https://emojiapi.dev/api/v1/robot.svg
+  containers:
+    nestjs-backend:
+      image: env-2430.registry.local/nestjs-backend:docker-less-2ab5e19
+      build: .
+      dockerfile: Dockerfile.nestjs-backend
+  services:
+    nestjs-backend-default:
+      description: Default NestJS application port
+      container: nestjs-backend
+      port: 3000
+      host-port: 3000
+      publish: true
+      protocol: tcp
+  connections: {}
+  variables: {}
+
+stack:
+  defines: group
+  members:
+    - dockerized-nestjs-production-app/nestjs-backend
