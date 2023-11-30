@@ -1,14 +1,13 @@
-# Using Node:10 Image Since it contains all the necessarity build tools required for dependencies with native build (node-gyp, python, gcc, g++, make)
-# First Stage : to install and build dependences
-FROM node:10 as builder
+# Use a more recent Node.js base image
+FROM node:14 as builder
 WORKDIR /app
-COPY ./package.json ./
+COPY package*.json ./
 RUN npm install
 COPY . .
 RUN npm run build
 
-# Second Stage : Setup command to run your app
-FROM node:10-alpine
+# Second stage: Set up the runtime environment
+FROM node:14-alpine
 WORKDIR /app
 COPY --from=builder /app ./
 EXPOSE 3000
